@@ -4,7 +4,7 @@ const blogBytecode = '0x6060604052341561000c57fe5b604051602080610168833981016040
 const blogAddress = '0x925d81c01d878899adbb7d38f84ce9d5284fa2e7';
 
 window.addEventListener('load', function() {
-    console.log("Shit runs");
+    console.log('Shit runs');
     // Checking if Web3 has been injected by the browser (Mist/MetaMask)
     if (typeof web3 !== 'undefined') {
         // Use Mist/MetaMask's provider
@@ -26,7 +26,7 @@ window.addEventListener('load', function() {
 function checkConnection() {
     // Set the connect status on the app
     if (window.web3 && window.web3.isConnected()) {
-        console.log("Connected");
+        console.log('Connected');
         return true;
     }
     console.log('Connection to node could not be estabilished..');
@@ -49,9 +49,9 @@ function loadPosts() {
 /**
  * Get the token balance of the currently active metamask account (0).
  */
-async function getTokenBalance() {
+function getTokenBalance() {
     var account = getActiveAcc();
-    var bal = await window.tokenContract.balanceOf(account).call({from: account});
+    var bal = window.tokenContract.balanceOf(account).call({from: account});
     return window.web3.toDecimal(bal);
 }
 
@@ -61,7 +61,7 @@ async function getTokenBalance() {
 async function getETHBalance() {
     var account = getActiveAcc();
     var bal = await window.web3.eth.getBalance(account);
-    console.log("Balance: " + account + ": " + window.web3.toDecimal(bal));
+    console.log('Balance: ' + account + ': ' + window.web3.toDecimal(bal));
     return window.web3.toDecimal(bal);
 }
 

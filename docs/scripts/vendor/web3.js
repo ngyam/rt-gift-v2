@@ -4769,3 +4769,4 @@ if(typeof define=='function'&&define.amd){define(function(){return BigNumber;});
 }else if(typeof module!='undefined'&&module.exports){module.exports=BigNumber;// Browser.
 }else{if(!globalObj)globalObj=typeof self!='undefined'?self:Function('return this')();globalObj.BigNumber=BigNumber;}})(this);},{}],'web3':[function(require,module,exports){var Web3=require('./lib/web3');// dont override global variable
 if(typeof window!=='undefined'&&typeof window.Web3==='undefined'){window.Web3=Web3;}module.exports=Web3;},{'./lib/web3':22}]},{},['web3']);//# sourceMappingURL=web3.js.map
+//# sourceMappingURL=web3.js.map

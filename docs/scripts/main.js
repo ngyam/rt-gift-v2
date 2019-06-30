@@ -74,3 +74,4 @@ function grabContracts() {
         gasPrice: '20000000000' // default gas price in wei, 20 gwei in this case
     });
 }
+//# sourceMappingURL=main.js.map

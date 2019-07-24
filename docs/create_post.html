@@ -1,0 +1,50 @@
+<!------------------------------------------- TO DO------------------------------------------>
+<!--Do checking Before Attempting to post form the frontend, and forbid to send the message to the backend if the poster is not eligible--->
+<!------------------------------------------------------------------------------------------->
+
+<p class="font_body_title">CREATE A NEW POST</p>
+<hr>
+<p class="font_body_normal">Only Ráhel and Tomi are eligible to create new posts! </p>
+
+<!---------------------------------------SCRIPTS---------------------------------------------->
+
+<script>
+    // NOT WORKING YET
+    var is_valid = false;
+    // Check if Metamask is installed, if the correct user is signed in, and if
+    function checkPost() {
+        // Check if MetaMask is installed:
+        window.addEventListener('load', function () {
+
+            // Check if Web3 has been injected by the browser (Mist/MetaMask).
+            window.alert("Are you Rahel or Tomi? Sign in to verify your eligibility!");
+            if (typeof web3 !== 'undefined') {
+                // Check if The account is correct
+                is_valid = true;
+                web3.eth.sign(web3.eth.defaultAccount, web3.sha3('test'), function (err, signature) {
+                    is_valid = false;
+                    window.alert("Are you Rahel or Tomi? Sign in to verify your eligibility!");
+                });
+            } else {
+                window.alert("The correct browser extension is missing.");
+            }
+        });
+        if (is_valid) {
+            // If user is eligible to post, prompt if the post is final
+            confirm("Are you sure you finished editing? Once you submit a post, it can never-ever be changed!"); //returns boolean
+        }
+        btn.disabled = true;
+    };
+
+</script>
+
+<!---------------------------------------INPUT FIELD---------------------------------------------->
+
+<form method="POST" id="create_post">
+    <input type="submit" value="Post!" require onclick="checkPost()">
+</form>
+
+
+<textarea class="scrollabletextbox textarea font_body_normal" name="note" rows=12 cols=80 form="create_post"
+    placeholder="What do you have to preserve forever? ^^">
+</textarea>

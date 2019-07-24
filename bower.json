@@ -1,9 +1,0 @@
-{
-  "name": "rt-gift-v2",
-  "private": true,
-  "dependencies": {},
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^5.2.0"
-  }
-}

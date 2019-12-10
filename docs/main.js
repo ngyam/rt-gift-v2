@@ -30,29 +30,8 @@ function checkConnection() {
         return true;
     }
     console.log('Connection to node could not be estabilished..');
-    window.alert('Connection to a node could not be estabilished. Please setup metamask/mist or a local node at "http://localhost:8545 and reload the page."');
+    window.alert('Connection to a node could not be estabilished. Please setup Metamask or a local node at "http://localhost:8545 and reload the page."');
     return false;
-}
-
-function estimateGas(message) {
-    
-}
-
-function post(message) {
-    
-}
-
-function loadPosts() {
-    
-}
-
-/**
- * Get the token balance of the currently active metamask account (0).
- */
-function getTokenBalance() {
-    var account = getActiveAcc();
-    var bal = window.tokenContract.balanceOf(account).call({from: account});
-    return window.web3.toDecimal(bal);
 }
 
 /**

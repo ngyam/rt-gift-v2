@@ -30,14 +30,11 @@
         $("#home").click(function () {
           window.location.href = "index.html";
         });
-        $("#about").click(function () {
-          $("#main_matter").load("./about.html");
-        });
-        $("#posts").click(function () {
-          $("#main_matter").load("./posts.html");
-        });
         $("#create_post").click(function () {
           $("#main_matter").load("./create_post.html");
+        });
+        $("#about").click(function () {
+          $("#main_matter").load("./about.html");
         });
       });
 
@@ -47,9 +44,6 @@
 </head>
 
 <body>
-  <script type="text/javascript">
-  Dapp.fetchWeb3();
-  </script>
 
   <!--------------------------------------------------------------HEADER--------------------------------------------------------------------->
 
@@ -63,13 +57,11 @@
           </th>
         </tr>
         <tr>
-          <td><a id="home">Home</a></td>
-          <td class="font_menu_sep">¤</td>
-          <td><a id="about">About</a></td>
-          <td class="font_menu_sep">¤</td>
-          <td><a id="posts">Posts</a></td>
+          <td><a id="home">Posts</a></td>
           <td class="font_menu_sep">¤</td>
           <td><a id="create_post">New post</a></td>
+          <td class="font_menu_sep">¤</td>
+          <td><a id="about">About</a></td>
         </tr>
       </table>
     </div>
@@ -85,14 +77,47 @@
   <!-- @param data - html response from the server -->
   <div class="body_base">
     <div id="main_matter">
-      <p class="font_body_title">HOME</p>
+      <p class="font_body_title">Entries</p>
       <hr>
-      <p class="font_body_title">This is a title paragraph.</p>
-      <p class="font_body_normal">This is normal text. <br>
-        And another line
+      <p id="blog_posts" class="font_body_normal">
+        The posts are currently loading... <br>
+        Check Metamask connection if it takes too long
       </p>
     </div>
   </div>
+
+  <script type="text/javascript">
+    Dapp.fetchWeb3().then(function (web3) {
+
+      web3.eth.net.getId().then(function(_id) {
+        if (_id !== 1) {
+          alert("You are not connected to the mainnet. Fix your Metamask, then reload the page.");
+        }
+      });
+
+      Dapp.getPostsHtml().then(function(posts) {
+        if (!posts || posts.length === 0) {
+            document.getElementById('blog_posts').innerHTML = (new Date().toUTCString()) + "<br>No posts found! :(<p><hr><p>";
+            return;
+        } 
+
+        var text = "";
+        for(var i = 0; i < posts.length; i++ ) {
+            text += "<b>" + posts[i].date + "</b><br>" + posts[i].message + "<p>" + "<hr>" + "<p>";
+        }
+        document.getElementById('blog_posts').innerHTML = text;
+      });
+    });
+
+    window.ethereum.on('networkChanged', function (networkID) {
+      console.log("Network changed (old API): " + networkID);
+    });
+
+    window.ethereum.on('chainChanged', function (chainId) {
+      console.log("Network changed (new API): " + chainId);
+    });
+
+  </script>
 
 </body>
 

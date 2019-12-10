@@ -13,17 +13,18 @@ const tokenJSONAbi = JSON.parse(tokenJSONAbiString)
 const tokenAddress = '0x72749495Ab74A59eF9E53f63062e99d074060ebc'
 
 export async function fetchWeb3() {
-    utils.getWeb3().then(async (web3: any) => {
-        if (!web3) {
-            alert("Please login to metamask & restart the page, or restart your browser")
-        }
-        window.web3 = web3
-        console.log("listening:", web3? await web3.eth.net.isListening(): false)
-        console.log(await getAccount())
-        
-        await tryBlogContract()
-        await tryTokenContract()    
-    })
+    let web3: any = await utils.getWeb3()
+    if (!web3) {
+        alert("Please login to Metamask & restart the page, or restart your browser")
+    }
+    window.web3 = web3
+    console.log("listening: ", web3? await web3.eth.net.isListening(): false)
+    console.log("Network: ", web3? await web3.eth.net.getId(): undefined)
+
+    await tryBlogContract()
+    await tryTokenContract()
+
+    return web3
 }
 
 export async function getAccount(): Promise<string> {
@@ -46,20 +47,11 @@ export async function getPostsHtml(): Promise<Post[]> {
         return []
     }
 
-    let posts = [
-        {
-            date: new Date(2019, 6, 16),
-            message:'Ma is megosztottunk valamit'
-        },
-        {
-            date: new Date(2019, 6, 17),
-            message: 'Meg ma is'
-        }
-    ]
+    let posts: Post[] = []
 
     let length = await window.blogContract.methods.getLength().call()
     let entry
-    for (let i = 0; i < length; i++) {
+    for (let i = length - 1; i >= 0 ; i--) {
         entry = await window.blogContract.methods.getEntry(i).call()
         posts.push({
             date: new Date(entry[0] * 1000),  
@@ -70,14 +62,23 @@ export async function getPostsHtml(): Promise<Post[]> {
 }
 
 export async function estimateGas(message: string): Promise<string> {
-    return await window.blogContract.methods.post(message).estimateGas({from: await getAccount()})
+    return await window.blogContract.methods.post(message).estimateGas()
 }
 
 export async function sendPost(message: string): Promise<any> {
-    return await window.blogContract.methods.post(message).send()
+    return await window.blogContract.methods.post(message).send({ from: await getAccount() })
 }
 
 export async function getTokenBalance(): Promise<any> {
-    let account = await getAccount()
-    return window.tokenContract.methods.balanceOf(account).call()
+    return window.web3.utils.fromWei(
+        await window.tokenContract.methods.balanceOf(await getAccount()).call(),
+        "wei"
+    )
+}
+
+export async function getETHBalance(): Promise<any> {
+    return window.web3.utils.fromWei(
+        await window.web3.eth.getBalance(await getAccount()),
+        "ether"
+    )
 }

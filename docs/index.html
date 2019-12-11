@@ -103,7 +103,7 @@
 
         var text = "";
         for(var i = 0; i < posts.length; i++ ) {
-            text += "<b>" + posts[i].date + "</b><br>" + posts[i].message + "<p>" + "<hr>" + "<p>";
+            text += "<b>" + posts[i].date + " <a href=https://www.google.com/maps/search/?api=1&query="+posts[i].latitude+","+posts[i].longitude+" target=_blank>Location</a></b><br>" + posts[i].message + "<p>" + "<hr>" + "<p>";
         }
         document.getElementById('blog_posts').innerHTML = text;
       });

@@ -8,5 +8,7 @@ export interface Window {
 
 export interface Post {
     date: Date,
-    message: string
+    message: string,
+    latitude: string,
+    longitude: string
 }

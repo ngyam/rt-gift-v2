@@ -2,49 +2,92 @@
 <!--Do checking Before Attempting to post form the frontend, and forbid to send the message to the backend if the poster is not eligible--->
 <!------------------------------------------------------------------------------------------->
 
-<p class="font_body_title">CREATE A NEW POST</p>
+<p class="font_body_title">1 post = 1 token. Ideally, only Ráhel and Tomi can create new posts!</p>
 <hr>
-<p class="font_body_normal">Only Ráhel and Tomi are eligible to create new posts! </p>
+<div class="new_post">
+    <div class="tablerow">
+        <label class="font_body_normal_margin" for="active_account">Active account:</label>
+        <p class="font_body_normal_margin" name="active_account" id="active_account"></p>
+    </div>
+    <div class="tablerow">
+        <label class="font_body_normal_margin" for="token_balance">Token balance:</label>
+        <p class="font_body_normal_margin" name="token_balance" id="token_balance"></p>
+    </div>
+    <div class="tablerow">
+        <label class="font_body_normal_margin" for="eth_balance">ETH balance (gas):</label>
+        <p class="font_body_normal_margin" name="eth_balance" id="eth_balance"></p>
+    </div>
+</div>
+<hr>
+
+<!---------------------------------------INPUT FIELD---------------------------------------------->
+<form action="" method="get" class="new_post">
+    <div class="tablerow">
+        <label class="font_body_normal_margin" for="input_lat">Latitude:</label>
+        <input class="font_body_normal_margin" type="text" name="input_lat" id="input_lat" maxlength="14" placeholder="optional, (-90,90)">
+    </div>
+    <div class="tablerow">
+        <label class="font_body_normal_margin" for="input_lon">Longitude:</label>
+        <input class="font_body_normal_margin" type="text" name="input_lon" id="input_lon" maxlength="14" placeholder="optional, (-180,180)">
+    </div>
+</form>
+<div class="new_post">
+    <textarea class="scrollabletextbox textarea font_body_normal_margin new_post" id="textarea_message" name="note" rows=12 cols=80
+        placeholder="What do you have to preserve forever? ^^"></textarea>
+</div>
+<button type="button" id="create_post" onclick="sendPost()">Post!</button>
+
 
 <!---------------------------------------SCRIPTS---------------------------------------------->
 
 <script>
-    // NOT WORKING YET
-    var is_valid = false;
-    // Check if Metamask is installed, if the correct user is signed in, and if
-    function checkPost() {
-        // Check if MetaMask is installed:
-        window.addEventListener('load', function () {
+    //document.getElementById("textarea_message").value = "";
 
-            // Check if Web3 has been injected by the browser (Mist/MetaMask).
-            window.alert("Are you Rahel or Tomi? Sign in to verify your eligibility!");
-            if (typeof web3 !== 'undefined') {
-                // Check if The account is correct
-                is_valid = true;
-                web3.eth.sign(web3.eth.defaultAccount, web3.sha3('test'), function (err, signature) {
-                    is_valid = false;
-                    window.alert("Are you Rahel or Tomi? Sign in to verify your eligibility!");
-                });
-            } else {
-                window.alert("The correct browser extension is missing.");
-            }
+    function updateAccount() {
+        Dapp.getAccount().then(function (account) {
+            console.log("Active account: " + account);
+            document.getElementById("active_account").innerHTML = account;
         });
-        if (is_valid) {
-            // If user is eligible to post, prompt if the post is final
-            confirm("Are you sure you finished editing? Once you submit a post, it can never-ever be changed!"); //returns boolean
-        }
-        btn.disabled = true;
+    }
+
+    function updateBalance() {
+        Dapp.getTokenBalance().then(function (tbalance) {
+            console.log("Token balance: " + tbalance);
+            document.getElementById("token_balance").innerHTML = tbalance;
+        });
+    }
+
+    function updateEth() {
+        Dapp.getETHBalance().then(function (balance) {
+            console.log("ETH balance (for gas): " + balance);
+            document.getElementById("eth_balance").innerHTML = balance;
+        });
+    }
+
+    updateAccount();
+    updateBalance();
+    updateEth();
+
+    function sendPost() {
+        console.log(document.getElementById("textarea_message").value);
+        Dapp.sendPost(
+            document.getElementById("textarea_message").value,
+            document.getElementById("input_lat").value,
+            document.getElementById("input_lon").value
+        ).then(function(res) {
+            console.log(res);
+            updateAccount();
+            updateBalance();
+            updateEth();
+        })
+        .catch(alert)
     };
 
+    window.ethereum.on('accountsChanged', function (accounts) {
+        console.log("Active account changed.");
+        updateAccount();
+        updateBalance();
+        updateEth();
+    });
+
 </script>
-
-<!---------------------------------------INPUT FIELD---------------------------------------------->
-
-<form method="POST" id="create_post">
-    <input type="submit" value="Post!" require onclick="checkPost()">
-</form>
-
-
-<textarea class="scrollabletextbox textarea font_body_normal" name="note" rows=12 cols=80 form="create_post"
-    placeholder="What do you have to preserve forever? ^^">
-</textarea>

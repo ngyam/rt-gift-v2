@@ -210,7 +210,14 @@ body{
 
 /*font settings for title texts in the body section*/
 .font_body_title{
+    text-transform: uppercase;
     font-size: 25px;
+}
+
+.font_body_title_2{
+    font-size: 21px;
+    padding-bottom: 4px;
+    padding-top: 4px;
 }
 
 /*font settings for text sections to-be-emphasized in the body section*/

@@ -124,6 +124,11 @@ html {
         display: none!important;
     }
 }
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+    display: none;
+  }
         
   /* ----------------------------------------------------------------PAGE--------------------------------------------------------*/
   
@@ -184,12 +189,28 @@ body{
     color: #5a5b26;
 }
 
+.font_header_narrow{
+    font-family: 'Dancing Script', cursive;
+    font-weight: bold;
+    letter-spacing: 3px;
+    font-size: 1.5em;
+    color: #5a5b26;
+}
+
 /*font settings for menu points*/
 .font_menu{
     font-family: 'Dancing Script', cursive;
     letter-spacing: 10px;
     vertical-align: middle;
 }
+
+/*font settings for the narrow menu points*/
+.font_menu_narrow{
+    font-family: 'Dancing Script', cursive;
+    letter-spacing: 10px;
+    vertical-align: left;
+}
+
 
 /*font settings for menu separators*/
 .font_menu_sep{
@@ -239,6 +260,10 @@ textarea {
     cursor: crosshair;
 }
 
+.header_img{
+    width: 40%;
+    /* height: 52/7 * width; */
+}
 
 
 /* ==========================================================================

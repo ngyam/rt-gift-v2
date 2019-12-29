@@ -1,0 +1,37 @@
+<head>
+    <script>
+        var width_tsrh = 1300;
+
+        $(document).ready(function () {
+            $("#home").click(function () {
+                window.location.href = "index.html";
+            });
+            $("#create_post").click(function () {
+                $("#main_matter").load("./create_post.html");
+            });
+            $("#about").click(function () {
+                $("#main_matter").load("./about.html");
+            });
+        });
+    </script>
+</head>
+
+
+<body>
+    <div class="inline header font_menu swap_menu" id="main_menu">
+        <table class="act_hover_link">
+            <tr>
+                <th colspan="5" class="font_header">
+                    Ráhel & Tomi
+                </th>
+            </tr>
+            <tr>
+                <td><a id="home">Posts</a></td>
+                <td class="font_menu_sep">¤</td>
+                <td><a id="create_post">New post</a></td>
+                <td class="font_menu_sep">¤</td>
+                <td><a id="about">About</td>
+            </tr>
+        </table>
+    </div>
+</body>

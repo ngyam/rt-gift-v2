@@ -23,84 +23,61 @@
   <!--Font for the header-->
   <link href="https://fonts.googleapis.com/css?family=Architects+Daughter" rel="stylesheet">
   <!--Font for the body-->
-  <script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js> </script> <script
-    type="text/javascript" src="scripts/bundle.js"></script>
-  <script>
-    var width_tsrh = 1300;
-
-    $(document).ready(function () {
-      $("#home").click(function () {
-        window.location.href = "index.html";
+  <script type="text/javascript" src=https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js> </script>
+  <script type="text/javascript" src="scripts/bundle.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#home").click(function () {
+          window.location.href = "index.html";
+        });
+        $("#create_post").click(function () {
+          $("#main_matter").load("./create_post.html");
+        });
+        $("#about").click(function () {
+          $("#main_matter").load("./about.html");
+        });
       });
-      $("#create_post").click(function () {
-        $("#main_matter").load("./create_post.html");
-      });
-      $("#about").click(function () {
-        $("#main_matter").load("./about.html");
-      });
-    });
 
-    $(window).ready(function () {
-      var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-      if (width <= width_tsrh) {
-        $("#main_menu").load("./main_menu_narrow.html");
-      } else if (width > width_tsrh) {
-        $("#main_menu").load("./main_menu_wide.html");
-      }
-    });
 
-    $(window).resize(function () { //Fires when window is resized
-      var width = (window.innerWidth > 0) ? window.innerWidth : screen.width;
-      if (width <= width_tsrh) {
-        $("#main_menu").load("./main_menu_narrow.html");
-      } else if (width > width_tsrh) {
-        $("#main_menu").load("./main_menu_wide.html");
-      }
-    });
-  </script>
+
+    </script>
 </head>
 
 <body>
 
   <!--------------------------------------------------------------HEADER--------------------------------------------------------------------->
 
-  <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
-
-  <!-- <div class="w80"> -->
-  <!--left-->
-  <!-- This div should be replaced by a pop-up menu if the screen is too narrow! -->
-
-  <div class="inline header font_menu swap_menu" id="main_menu">
-    <table class="act_hover_link">
-      <tr>
-        <th colspan="5" class="font_header">
-          Ráhel & Tomi
-        </th>
-      </tr>
-      <tr>
-        <td><a id="home">Posts</a></td>
-        <td class="font_menu_sep">¤</td>
-        <td><a id="create_post">New post</a></td>
-        <td class="font_menu_sep">¤</td>
-        <td><a id="about">About</td>
-      </tr>
-    </table>
+  <div class="w80">
+    <!--left-->
+    <div class="inline header font_menu ">
+      <table class="act_hover_link">
+        <tr>
+          <th colspan="5" class="font_header">
+            Ráhel & Tomi
+          </th>
+        </tr>
+        <tr>
+          <td><a id="home">Posts</a></td>
+          <td class="font_menu_sep">¤</td>
+          <td><a id="create_post">New post</a></td>
+          <td class="font_menu_sep">¤</td>
+          <td><a id="about">About</a></td>
+        </tr>
+      </table>
+    </div>
+    <!-- div is for a header pictue -->
+    <div class="inline header_rigth t_col2" id="yMap_Acro_top">
+      <img src="images/header.png" width=700 height=520>
+    </div>
   </div>
-
-  <!-- div is for a header pictue -->
-  <!-- <div class="inline header_rigth t_col2" id="yMap_Acro_top"> -->
-  <img class="header_img inline header_rigth t_col2" id="yMap_Acro_top" src="images/header.png">
-  <!-- width=700 height=520 -->
-  <!-- </div> -->
-  <!-- </div> -->
 
   <!--------------------------------------------------------------BODY--------------------------------------------------------------------->
 
   <!-- this ajax call will replace the paragraph with id="message" with the content of parameter data -->
   <!-- @param data - html response from the server -->
-  <div class="body_base" id="body">
+  <div class="body_base">
     <div id="main_matter">
-      <p class="font_body_title">Posts</p>
+      <p class="font_body_title">Entries</p>
       <hr>
       <p id="blog_posts" class="font_body_normal">
         The posts are currently loading... <br>
@@ -112,21 +89,21 @@
   <script type="text/javascript">
     Dapp.fetchWeb3().then(function (web3) {
 
-      web3.eth.net.getId().then(function (_id) {
+      web3.eth.net.getId().then(function(_id) {
         if (_id !== 1) {
           alert("You are not connected to the mainnet. Fix your Metamask, then reload the page.");
         }
       });
 
-      Dapp.getPostsHtml().then(function (posts) {
+      Dapp.getPostsHtml().then(function(posts) {
         if (!posts || posts.length === 0) {
-          document.getElementById('blog_posts').innerHTML = (new Date().toUTCString()) + "<br>No posts found! :(<p><hr><p>";
-          return;
-        }
+            document.getElementById('blog_posts').innerHTML = (new Date().toUTCString()) + "<br>No posts found! :(<p><hr><p>";
+            return;
+        } 
 
         var text = "";
-        for (var i = 0; i < posts.length; i++) {
-          text += "<b>" + posts[i].date + " <a href=https://www.google.com/maps/search/?api=1&query=" + posts[i].latitude + "," + posts[i].longitude + " target=_blank>Location</a></b><br>" + posts[i].message + "<p>" + "<hr>" + "<p>";
+        for(var i = 0; i < posts.length; i++ ) {
+            text += "<b>" + posts[i].date + " <a href=https://www.google.com/maps/search/?api=1&query="+posts[i].latitude+","+posts[i].longitude+" target=_blank>Location</a></b><br>" + posts[i].message + "<p>" + "<hr>" + "<p>";
         }
         document.getElementById('blog_posts').innerHTML = text;
       });

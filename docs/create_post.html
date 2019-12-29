@@ -2,8 +2,14 @@
 <!--Do checking Before Attempting to post form the frontend, and forbid to send the message to the backend if the poster is not eligible--->
 <!------------------------------------------------------------------------------------------->
 
-<p class="font_body_title">1 post = 1 token. Ideally, only Ráhel and Tomi can create new posts!</p>
+<p class="font_body_title">New post</p>
+
 <hr>
+
+<p class="font_body_normal_margin">
+    1 post = 1 token. Ideally, only Ráhel and Tomi can create new posts!<br></br>
+</p class="font_body_normal_margin">
+
 <div class="new_post">
     <div class="tablerow">
         <label class="font_body_normal_margin" for="active_account">Active account:</label>
@@ -20,6 +26,7 @@
 </div>
 <hr>
 
+
 <!---------------------------------------INPUT FIELD---------------------------------------------->
 <form action="" method="get" class="new_post">
     <div class="tablerow">
@@ -32,7 +39,7 @@
     </div>
 </form>
 <div class="new_post">
-    <textarea class="scrollabletextbox textarea font_body_normal_margin new_post" id="textarea_message" name="note" rows=12 cols=80
+    <textarea class="scrollabletextbox textarea font_body_normal_margin new_post" id="textarea_message" name="note" rows=12 cols=60
         placeholder="What do you have to preserve forever? ^^"></textarea>
 </div>
 <button type="button" id="create_post" onclick="sendPost()">Post!</button>

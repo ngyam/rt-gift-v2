@@ -4,13 +4,13 @@ import {Window, Post} from './types'
 
 declare let window: Window
 
-const blogJSONAbiString = '[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"blogEntries","outputs":[{"name":"timestamp","type":"uint256"},{"name":"lat","type":"bytes16"},{"name":"lon","type":"bytes16"},{"name":"post","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"tokenAddress","type":"address"},{"name":"_timestamp","type":"uint256"},{"name":"_lat","type":"bytes16"},{"name":"_lon","type":"bytes16"},{"name":"firstPost","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"poster","type":"address"},{"indexed":false,"name":"timestamp","type":"uint256"},{"indexed":false,"name":"postId","type":"uint256"}],"name":"BlogPost","type":"event"},{"constant":true,"inputs":[],"name":"getLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint256"}],"name":"getEntry","outputs":[{"name":"","type":"uint256"},{"name":"","type":"bytes16"},{"name":"","type":"bytes16"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTokenAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_post","type":"string"},{"name":"_lat","type":"bytes16"},{"name":"_lon","type":"bytes16"}],"name":"post","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]'
+const blogJSONAbiString = '[{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"blogEntries","outputs":[{"name":"timestamp","type":"uint256"},{"name":"lat","type":"bytes16"},{"name":"lon","type":"bytes16"},{"name":"post","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"tokenAddress","type":"address"},{"name":"_timestamp","type":"uint256"},{"name":"_lat","type":"bytes16"},{"name":"_lon","type":"bytes16"},{"name":"firstPost","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"poster","type":"address"},{"indexed":false,"name":"timestamp","type":"uint256"},{"indexed":false,"name":"postId","type":"uint256"}],"name":"BlogPost","type":"event"},{"constant":true,"inputs":[],"name":"getLength","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint256"}],"name":"getEntry","outputs":[{"name":"","type":"uint256"},{"name":"","type":"bytes16"},{"name":"","type":"bytes16"},{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint256"}],"name":"getTimestamp","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint256"}],"name":"getCoordinates","outputs":[{"name":"","type":"bytes16"},{"name":"","type":"bytes16"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"_id","type":"uint256"}],"name":"getMessage","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"getTokenAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_post","type":"string"},{"name":"_lat","type":"bytes16"},{"name":"_lon","type":"bytes16"}],"name":"post","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"function"}]'
 const blogJSONAbi = JSON.parse(blogJSONAbiString)
-const blogAddress = '0xaAc6B15e7e6ADdE49f0068dBDCA25bc3B9527Ec6'
+const blogAddress = '0x9AC85E50Db8A2B2e473e9663747d3E497423858c'
 
 const tokenJSONAbiString = '[{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint8"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"renounceOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"isOwner","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_name","type":"string"},{"name":"_symbol","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"burner","type":"address"},{"indexed":true,"name":"owner","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Burn","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"previousOwner","type":"address"},{"indexed":true,"name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_addedValue","type":"uint256"}],"name":"increaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_subtractedValue","type":"uint256"}],"name":"decreaseApproval","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_who","type":"address"},{"name":"_value","type":"uint256"}],"name":"burn","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"}]'
 const tokenJSONAbi = JSON.parse(tokenJSONAbiString)
-const tokenAddress = '0x63108b8b58548Bc1Dc63031fe34dde6c7664b3da'
+const tokenAddress = '0xC3e6e90BF385C17EB75fe9E751C5CdEFADBaEeCc'
 
 export async function fetchWeb3() {
     let web3: any = await utils.getWeb3()
@@ -50,14 +50,29 @@ export async function getPostsHtml(): Promise<Post[]> {
     let posts: Post[] = []
 
     let length = await window.blogContract.methods.getLength().call()
-    let entry
-    for (let i = length - 1; i >= 0 ; i--) {
+    // let entry
+    let coords
+    let message
+    let stamp
+    for (let i = length - 1; i >= 0; i--) {
+        /*
         entry = await window.blogContract.methods.getEntry(i).call()
         posts.push({
             date: new Date(entry[0] * 1000),
             latitude: window.web3.utils.hexToUtf8(entry[1]),
             longitude: window.web3.utils.hexToUtf8(entry[2]),
             message: entry[3]
+        })
+        */
+        coords = await window.blogContract.methods.getCoordinates(i).call()
+        stamp = await window.blogContract.methods.getTimestamp(i).call()
+        message = await window.blogContract.methods.getMessage(i).call()
+
+        posts.push({
+            date: new Date(stamp * 1000),
+            latitude: window.web3.utils.hexToUtf8(coords[0]),
+            longitude: window.web3.utils.hexToUtf8(coords[1]),
+            message: message
         })
     }
     return posts

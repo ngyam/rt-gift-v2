@@ -31,7 +31,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "rt-gift-contracts": "git+https://github.com/ngyam/rt-gift-contracts.git",
     "source-map-loader": "^0.2.4",
-    "terser": "^4.1.2",
+    "terser": "^4.8.1",
     "typescript": "^3.5.3",
     "web3": "^1.2.4",
     "webpack": "^4.36.1",
